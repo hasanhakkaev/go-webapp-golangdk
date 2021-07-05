@@ -1,3 +1,4 @@
+// Package server contains everything for setting up and running the HTTP server.
 package server
 
 import (
@@ -15,27 +16,28 @@ import (
 
 type Server struct {
 	address string
+	log     *zap.Logger
 	mux     chi.Router
 	server  *http.Server
-	log     *zap.Logger
 }
 
 type Options struct {
 	Host string
-	Port int
 	Log  *zap.Logger
+	Port int
 }
 
 func New(opts Options) *Server {
 	if opts.Log == nil {
 		opts.Log = zap.NewNop()
 	}
+
 	address := net.JoinHostPort(opts.Host, strconv.Itoa(opts.Port))
 	mux := chi.NewMux()
 	return &Server{
 		address: address,
-		mux:     mux,
 		log:     opts.Log,
+		mux:     mux,
 		server: &http.Server{
 			Addr:              address,
 			Handler:           mux,
@@ -58,6 +60,7 @@ func (s *Server) Start() error {
 	return nil
 }
 
+// Stop the Server gracefully within the timeout.
 func (s *Server) Stop() error {
 	s.log.Info("Stopping")
 

@@ -1,7 +1,8 @@
+// Package main is the entry point to the server. It reads configuration, sets up logging and error handling,
+// handles signals from the OS, and starts and stops the server.
 package main
 
 import (
-	"canvas/server"
 	"context"
 	"fmt"
 	"os"
@@ -11,6 +12,8 @@ import (
 
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
+
+	"canvas/server"
 )
 
 // release is set through the linker at build time, generally from a git sha.
@@ -40,8 +43,8 @@ func start() int {
 
 	s := server.New(server.Options{
 		Host: host,
-		Port: port,
 		Log:  log,
+		Port: port,
 	})
 
 	var eg errgroup.Group
@@ -65,7 +68,6 @@ func start() int {
 	if err := eg.Wait(); err != nil {
 		return 1
 	}
-
 	return 0
 }
 
