@@ -1,6 +1,4 @@
 package server
-<<<<<<< Updated upstream
-=======
 
 import (
 	"context"
@@ -72,4 +70,3 @@ func (s *Server) Stop() error {
 
 	return nil
 }
->>>>>>> Stashed changes
