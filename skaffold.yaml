@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta24
+kind: Config
+metadata:
+  name: go-app
+build:
+  artifacts:
+  - image: go-app
+deploy:
+  kubectl:
+    manifests:
+      - k8s-*
+portForward:
+  - resourceType: deployment
+    resourceName: go-app
+    port: 8080
+    localPort: 8080
+

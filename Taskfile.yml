@@ -1,0 +1,17 @@
+version: '3'
+
+vars:
+  GIT_TAG:
+    sh: git describe --tags --abbrev=0
+
+tasks:
+  start:
+    cmds:
+      - go run cmd/server/*.go
+    silent: false
+  docker_all:
+    cmds:
+      - docker build -t go-webapp:{{.GIT_TAG}} .
+      - docker run -d -p 8080:8080 -e HOST="" go-webapp:{{.GIT_TAG}}
+    silent: false
+
