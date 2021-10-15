@@ -5,5 +5,8 @@ import (
 )
 
 func (s *Server) setupRoutes() {
-	handlers.Health(s.mux)
+	handlers.Home(s.mux)
+	handlers.Team(s.mux)
+	handlers.Projects(s.mux)
+	handlers.Calendar(s.mux)
 }

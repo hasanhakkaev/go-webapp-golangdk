@@ -5,11 +5,14 @@ COPY go.mod go.sum ./
 RUN go mod download -x
 
 COPY . ./
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-X 'main.release=`git rev-parse --short=8 HEAD`'" -o /bin/server cmd/server/*.go
+ARG SKAFFOLD_GO_GCFLAGS
+RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -ldflags="-X 'main.release=`git rev-parse --short=8 HEAD`'" -o /bin/go-app cmd/server/*.go
 
-FROM gcr.io/distroless/base-debian10
+FROM gcr.io/distroless/base
+ENV GOTRACEBACK=single
 WORKDIR /app
 
-COPY --from=builder /bin/server ./
+COPY --from=builder /bin/go-app ./
+EXPOSE 8080
 
-CMD ["./server"]
+CMD ["./go-app"]
