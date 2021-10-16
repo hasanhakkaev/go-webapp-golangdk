@@ -1,7 +1,7 @@
 .PHONY: build cover start test test-integration
 
 build:
-	docker build -t canvas .
+	docker build -t go-web-app .
 
 cover:
 	go tool cover -html=cover.out

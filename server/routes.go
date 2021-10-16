@@ -1,7 +1,7 @@
 package server
 
 import (
-	"canvas/handlers"
+	"go-web-app/handlers"
 )
 
 func (s *Server) setupRoutes() {

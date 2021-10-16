@@ -13,7 +13,7 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 
-	"canvas/server"
+	"go-web-app/server"
 )
 
 // release is set through the linker at build time, generally from a git sha.

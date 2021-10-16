@@ -6,7 +6,7 @@ import (
 
 	"github.com/matryer/is"
 
-	"canvas/integrationtest"
+	"go-web-app/integrationtest"
 )
 
 func TestServer_Start(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"canvas/views"
+	"go-web-app/views"
 )
 
 func Home(mux chi.Router) {
