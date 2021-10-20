@@ -7,11 +7,13 @@ vars:
 tasks:
   start:
     cmds:
-      - go run ../cmd/server/*.go
+      - go run -ldflags="-X 'main.release={{.GIT_TAG}}'" ../cmd/server/*.go
     silent: false
-  docker_all:
+  dbuild:
     cmds:
-      - docker build -t go-webapp:{{.GIT_TAG}} ../
-      - docker run -d -p 8080:8080 -e HOST="" go-webapp:{{.GIT_TAG}}
+      - docker build -t go-webapp-golangdk:{{.GIT_TAG}} ../
     silent: false
-
+  dstart:
+    cmds:
+      - docker run -d -p 8080:8080 -e HOST="" go-webapp-golangdk:{{.GIT_TAG}}
+    silent: false
