@@ -5,6 +5,7 @@ import (
 )
 
 func (s *Server) setupRoutes() {
+	handlers.Static(s.mux)
 	handlers.Home(s.mux)
 	handlers.Team(s.mux)
 	handlers.Projects(s.mux)

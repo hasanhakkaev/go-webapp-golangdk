@@ -17,11 +17,11 @@ func Page(title, path string, body ...g.Node) g.Node {
 		Title:    title,
 		Language: "en",
 		Head: []g.Node{
-			Script(Src("/assets/dropdown.js")),
-			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/base.min.css")),
-			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/components.min.css")),
-			Link(Rel("stylesheet"), Href("https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css")),
-			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/utilities.min.css")),
+			Script(Src("/static/js/dropdown.js")),
+			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/base.min.css"), Type("text/css")),
+			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/components.min.css"), Type("text/css")),
+			Link(Rel("stylesheet"), Href("https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css"), Type("text/css")),
+			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/utilities.min.css"), Type("text/css")),
 		},
 		Body: []g.Node{
 			c.Classes{"antialiased font-sans bg-gray-200 overflow-hidden": true},
@@ -111,7 +111,6 @@ func ButtonUserMenu() g.Node {
 // Dropdown menu
 func DropdownMenu() g.Node {
 	return Div(DataAttr("dropdown-toggle", "dropdown"),
-		//g.Raw(`data-dropdown-toggle="dropdown" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." x-bind:aria-activedescendant="activeDescendant"`),
 		Class("origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"),
 		Role("menu"),
 		Aria("orientation", "vertical"),
@@ -121,8 +120,6 @@ func DropdownMenu() g.Node {
 		A(Href("#"), g.Text("Settings"), c.Classes{"block px-4 py-2 text-sm text-gray-700": true}, Role("menuitem"), TabIndex("-1"), ID("user-menu-item-1")),
 		A(Href("#"), g.Text("Sign out"), c.Classes{"block px-4 py-2 text-sm text-gray-700": true}, Role("menuitem"), TabIndex("-1"), ID("user-menu-item-2")),
 	)
-
-	//return g.Raw(`<div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." x-bind:aria-activedescendant="activeDescendant" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" @keydown.arrow-up.prevent="onArrowUp()" @keydown.arrow-down.prevent="onArrowDown()" @keydown.tab="open = false" @keydown.enter.prevent="open = false; focusButton()" @keyup.space.prevent="open = false; focusButton()">`)
 }
 
 func Container(padY bool, children ...g.Node) g.Node {
