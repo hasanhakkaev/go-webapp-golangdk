@@ -3,7 +3,7 @@ module go-web-app
 go 1.16
 
 require (
-	github.com/go-chi/chi/v5 v5.0.4
+	github.com/go-chi/chi v1.5.4
 	github.com/maragudk/gomponents v0.18.0
 	github.com/matryer/is v1.4.0
 	go.uber.org/atomic v1.9.0 // indirect

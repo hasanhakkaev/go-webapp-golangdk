@@ -17,7 +17,7 @@ func Page(title, path string, body ...g.Node) g.Node {
 		Title:    title,
 		Language: "en",
 		Head: []g.Node{
-			Script(Src("/static/js/dropdown.js")),
+			Link(Rel("icon"), Href(("/static/favicon.png")), Type("image/png")),
 			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/base.min.css"), Type("text/css")),
 			Link(Rel("stylesheet"), Href("https://unpkg.com/tailwindcss@2.1.2/dist/components.min.css"), Type("text/css")),
 			Link(Rel("stylesheet"), Href("https://unpkg.com/@tailwindcss/typography@0.4.0/dist/typography.min.css"), Type("text/css")),
@@ -34,6 +34,7 @@ func Page(title, path string, body ...g.Node) g.Node {
 				Prose(g.Group(body)),
 			),
 			PageFooter(),
+			Script(Src("https://unpkg.com/@themesberg/flowbite@1.0.7/dist/flowbite.bundle.js")),
 		},
 	})
 }
@@ -104,17 +105,18 @@ func ButtonUserMenu() g.Node {
 		Img(Class("h-8 w-8 rounded-full"),
 			Src("https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"),
 			Alt(""),
+			DataAttr("dropdown-toggle", "dropdown"),
 		),
 	)
 }
 
 // Dropdown menu
 func DropdownMenu() g.Node {
-	return Div(DataAttr("dropdown-toggle", "dropdown"),
-		Class("origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"),
+	return Div(ID("dropdown"),
+		Class("hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"),
 		Role("menu"),
 		Aria("orientation", "vertical"),
-		Aria("labelledby", "user-menu-button"),
+		Aria("labelledby", "dropdown"),
 		TabIndex("-1"),
 		A(Href("#"), g.Text("Your Profile"), c.Classes{"block px-4 py-2 text-sm text-gray-700": true}, Role("menuitem"), TabIndex("-1"), ID("user-menu-item-0")),
 		A(Href("#"), g.Text("Settings"), c.Classes{"block px-4 py-2 text-sm text-gray-700": true}, Role("menuitem"), TabIndex("-1"), ID("user-menu-item-1")),
